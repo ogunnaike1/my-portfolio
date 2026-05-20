@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c7cee1"/>
+      <stop offset="100%" stop-color="#748fb0"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#436580"/>
+      <stop offset="100%" stop-color="#2a4a63"/>
+    </linearGradient>
+    <clipPath id="circle">
+      <circle cx="100" cy="100" r="100"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
+
+  <!-- Subtle grain texture via small repeating shapes -->
+  <circle cx="100" cy="100" r="100" fill="url(#bg)" opacity="0.6"/>
+
+  <!-- Body / shoulders -->
+  <ellipse cx="100" cy="185" rx="58" ry="38" fill="url(#body)" clip-path="url(#circle)"/>
+
+  <!-- Neck -->
+  <rect x="88" y="118" width="24" height="22" rx="6" fill="#e8dfd0" clip-path="url(#circle)"/>
+
+  <!-- Head -->
+  <ellipse cx="100" cy="100" rx="34" ry="38" fill="#e8dfd0"/>
+
+  <!-- Hair -->
+  <ellipse cx="100" cy="74" rx="34" ry="20" fill="#3a3028"/>
+  <rect x="66" y="74" width="6" height="22" rx="3" fill="#3a3028"/>
+  <rect x="128" y="74" width="6" height="22" rx="3" fill="#3a3028"/>
+
+  <!-- Eyes -->
+  <ellipse cx="88" cy="100" rx="4.5" ry="5" fill="#2a2018"/>
+  <ellipse cx="112" cy="100" rx="4.5" ry="5" fill="#2a2018"/>
+  <circle cx="90" cy="98.5" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="114" cy="98.5" r="1.5" fill="white" opacity="0.7"/>
+
+  <!-- Nose -->
+  <path d="M100 106 Q96 112 98 114 Q100 115.5 102 114 Q104 112 100 106Z" fill="#c9a98a" opacity="0.6"/>
+
+  <!-- Mouth -->
+  <path d="M91 121 Q100 127 109 121" stroke="#b0896a" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Subtle collar / shirt detail -->
+  <path d="M72 162 Q88 148 100 145 Q112 148 128 162" fill="#436580" clip-path="url(#circle)"/>
+</svg>

@@ -1,0 +1,326 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Iris Calder — Portfolio · design tokens
+   ============================================================ */
+
+:root {
+  --font-display: "Clash Display", "General Sans", ui-serif, Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* ===== Theme: light — Soft Tech Blue ===== */
+:root[data-theme="light"] {
+  --bg: #eeebf0;
+  --bg-soft: #e6e2eb;
+  --surface: #ffffff;
+  --fg: #1a2233;
+  --fg-soft: #4a5466;
+  --fg-mute: #7a8295;
+
+  --primary: #748fb0;
+  --primary-deep: #436580;
+  --accent: #94a9cc;
+
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(67, 101, 128, 0.16);
+  --glass-inner: rgba(255, 255, 255, 0.7);
+
+  --line: rgba(67, 101, 128, 0.14);
+
+  --hero-orb-a: #c7cee1;
+  --hero-orb-b: #94a9cc;
+  --hero-grain: rgba(67, 101, 128, 0.04);
+
+  --term-bg: rgba(20, 30, 50, 0.92);
+  --term-fg: #cbd6ea;
+
+  --ok: #4a8270;
+
+  color-scheme: light;
+}
+
+/* ===== Theme: warm — Desert Parchment ===== */
+:root[data-theme="warm"] {
+  --bg: #ded1bd;
+  --bg-soft: #d4c7ae;
+  --surface: #f0e8d8;
+  --fg: #2e2b1a;
+  --fg-soft: #6c6b56;
+  --fg-mute: #67686c;
+
+  --primary: #b08401;
+  --primary-deep: #7a5c00;
+  --accent: #d49e8d;
+
+  --glass-bg: rgba(240, 232, 216, 0.6);
+  --glass-border: rgba(176, 132, 1, 0.18);
+  --glass-inner: rgba(255, 250, 240, 0.7);
+
+  --line: rgba(176, 132, 1, 0.15);
+
+  --hero-orb-a: #d49e8d;
+  --hero-orb-b: #b08401;
+  --hero-grain: rgba(176, 132, 1, 0.05);
+
+  --term-bg: rgba(44, 40, 20, 0.92);
+  --term-fg: #ded1bd;
+
+  --ok: #5a7a3a;
+
+  color-scheme: light;
+}
+
+/* ===== Theme: dark — Deep Ocean ===== */
+:root[data-theme="dark"] {
+  --bg: #05464c;
+  --bg-soft: #073e44;
+  --surface: #0a585f;
+  --fg: #f6f6f2;
+  --fg-soft: #cfe1e3;
+  --fg-mute: #8bb0b5;
+
+  --primary: #028389;
+  --primary-deep: #abcfdb;
+  --accent: #abcfdb;
+
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(171, 207, 219, 0.18);
+  --glass-inner: rgba(255, 255, 255, 0.05);
+
+  --line: rgba(171, 207, 219, 0.16);
+
+  --hero-orb-a: #028389;
+  --hero-orb-b: #073e44;
+  --hero-grain: rgba(255, 255, 255, 0.04);
+
+  --term-bg: rgba(0, 0, 0, 0.45);
+  --term-fg: #d6ecef;
+
+  --ok: #6fd0a8;
+
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg text-fg font-body antialiased;
+    transition: background-color 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+      color 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--primary);
+    color: var(--bg);
+  }
+  em {
+    font-style: normal;
+    color: var(--primary-deep);
+  }
+}
+
+@layer components {
+  /* Glass primitive */
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    backdrop-filter: blur(20px) saturate(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(1.1);
+    box-shadow:
+      0 8px 28px rgba(20, 30, 55, 0.08),
+      inset 0 0 0 1px var(--glass-inner);
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-full text-[14.5px] tracking-tight;
+    transition:
+      transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+      background 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+      color 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+      border-color 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+    will-change: transform;
+  }
+  .btn-primary {
+    @apply btn px-[18px] py-3 bg-fg text-bg border border-fg;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px -6px color-mix(in oklab, var(--fg) 35%, transparent);
+  }
+  .btn-ghost {
+    @apply btn px-[18px] py-3 text-fg;
+    background: var(--glass-bg);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .btn-ghost:hover {
+    border-color: var(--primary);
+    color: var(--primary-deep);
+  }
+  .btn-link {
+    @apply btn py-3 px-1 text-fg;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+  }
+  .btn-link:hover {
+    color: var(--primary-deep);
+    border-color: var(--primary-deep);
+  }
+
+  /* Eyebrow / mono badge */
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 font-mono text-[12px] tracking-[0.04em] uppercase text-fg-mute;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Section title */
+  .section-title {
+    @apply font-display font-medium leading-[1.05] tracking-[-0.022em] m-0 max-w-[920px];
+    font-size: clamp(34px, 4.6vw, 64px);
+    text-wrap: balance;
+  }
+  .section-index {
+    @apply inline-flex items-center gap-2.5 font-mono text-[12px] tracking-[0.12em] uppercase text-fg-mute mb-7;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .muted {
+    color: var(--fg-mute);
+  }
+
+  /* Form fields */
+  .field-input {
+    @apply text-[15px] text-fg outline-none w-full;
+    padding: 12px 14px;
+    background: var(--glass-inner);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    transition:
+      border-color 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+      background 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+    font-family: var(--font-body);
+  }
+  .field-input::placeholder {
+    color: var(--fg-mute);
+  }
+  .field-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 18%, transparent);
+    background: var(--surface);
+  }
+
+  .chip {
+    @apply font-mono text-[11px] tracking-[0.04em] text-fg-mute;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    transition: border-color 0.3s, color 0.3s, background 0.3s;
+  }
+  .chip:hover,
+  .chip.is-on {
+    border-color: var(--primary);
+    color: var(--primary-deep);
+    background: color-mix(in oklab, var(--primary) 8%, transparent);
+  }
+
+  /* Tags (skills) */
+  .tag {
+    @apply absolute inline-flex items-center font-display font-medium text-[15px] tracking-tight text-fg;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 4px 14px rgba(20, 30, 55, 0.05);
+    transition: transform 0.5s, border-color 0.3s, color 0.3s;
+  }
+  .tag:hover {
+    border-color: var(--primary);
+    color: var(--primary-deep);
+    transform: scale(1.05);
+  }
+  .tag-lg {
+    font-size: 18px;
+    padding: 12px 22px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Code tokens */
+  .t-c { color: var(--primary-deep); }
+  .t-v { color: var(--fg); }
+  .t-fn { color: var(--accent); }
+  .t-k { color: var(--fg-mute); }
+  .t-s { color: var(--ok); }
+  .t-b { color: #b78a4a; }
+  .t-p { color: var(--accent); }
+
+  /* Ticker mask */
+  .mask-ticker {
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  /* Code block */
+  .code {
+    margin: 0;
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--fg-soft);
+    white-space: pre;
+    overflow: hidden;
+  }
+
+  /* Terminal block */
+  .term {
+    background: var(--term-bg);
+    color: var(--term-fg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.8;
+    padding: 20px;
+    border-radius: 14px;
+    width: 100%;
+  }
+  .term-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .term-dim  { color: color-mix(in oklab, var(--term-fg) 50%, transparent); }
+  .term-ok   { color: #6fd0a8; }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

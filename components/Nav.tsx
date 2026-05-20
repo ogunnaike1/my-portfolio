@@ -1,0 +1,188 @@
+"use client";
+
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
+
+const LINKS = [
+  { href: "#work", label: "Work" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Craft" },
+  { href: "#contact", label: "Contact" },
+];
+
+const ease = [0.2, 0.7, 0.2, 1] as const;
+
+export default function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>("work");
+  const [hoverId, setHoverId] = useState<string | null>(null);
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const linksContainerRef = useRef<HTMLDivElement | null>(null);
+  const [indicator, setIndicator] = useState<{ left: number; width: number; on: boolean }>({
+    left: 0,
+    width: 0,
+    on: false,
+  });
+
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
+
+  // Track active section via IntersectionObserver
+  useEffect(() => {
+    const sections = LINKS.map((l) => document.getElementById(l.href.slice(1))).filter(
+      (el): el is HTMLElement => Boolean(el)
+    );
+    if (sections.length === 0) return;
+
+    const ratios = new Map<string, number>();
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          ratios.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
+        });
+        const best = Array.from(ratios.entries()).reduce<{ id: string; r: number } | null>(
+          (acc, [id, r]) => (!acc || r > acc.r ? { id, r } : acc),
+          null
+        );
+        if (best && best.r > 0.1) setActiveId(best.id);
+      },
+      { threshold: [0.2, 0.4, 0.6] }
+    );
+
+    sections.forEach((s) => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
+
+  // Position underline indicator
+  useEffect(() => {
+    const target = hoverId || activeId;
+    if (!target || !linksContainerRef.current) {
+      setIndicator((p) => ({ ...p, on: false }));
+      return;
+    }
+    const link = linkRefs.current[target];
+    if (!link) return;
+    const parent = linksContainerRef.current.getBoundingClientRect();
+    const r = link.getBoundingClientRect();
+    setIndicator({ left: r.left - parent.left, width: r.width, on: true });
+  }, [hoverId, activeId, scrolled]);
+
+  // Reposition on resize
+  useEffect(() => {
+    const onResize = () => {
+      const target = hoverId || activeId;
+      if (!target || !linksContainerRef.current) return;
+      const link = linkRefs.current[target];
+      if (!link) return;
+      const parent = linksContainerRef.current.getBoundingClientRect();
+      const r = link.getBoundingClientRect();
+      setIndicator({ left: r.left - parent.left, width: r.width, on: true });
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [hoverId, activeId]);
+
+  return (
+    <header
+      data-scrolled={scrolled || undefined}
+      className="nav-shell fixed z-50 grid grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-full border border-transparent transition-all duration-500 ease-[cubic-bezier(.2,.7,.2,1)]"
+    >
+      {/* Logo */}
+      <motion.a
+        href="#top"
+        className="inline-flex items-center gap-2.5 font-display font-semibold tracking-tight"
+        animate={{ scale: scrolled ? 0.95 : 1 }}
+        transition={{ duration: 0.5, ease }}
+        aria-label="Home"
+      >
+        <span
+          className="inline-grid h-8 w-8 place-items-center rounded-full text-[12px] font-bold tracking-wide"
+          style={{ background: "var(--fg)", color: "var(--bg)" }}
+        >
+          UO
+        </span>
+        <span className="hidden text-[17px] sm:inline">Usman&nbsp;Ogunnaike</span>
+      </motion.a>
+
+      {/* Links */}
+      <nav
+        ref={linksContainerRef}
+        className="relative inline-flex items-center gap-7 text-[14.5px] text-fg-soft"
+        aria-label="Primary"
+      >
+        {LINKS.map((l) => {
+          const id = l.href.slice(1);
+          const isActive = activeId === id;
+          return (
+            <a
+              key={l.href}
+              ref={(el) => {
+                linkRefs.current[id] = el;
+              }}
+              href={l.href}
+              onMouseEnter={() => setHoverId(id)}
+              onMouseLeave={() => setHoverId(null)}
+              className="relative py-2 transition-colors"
+              style={{ color: isActive ? "var(--fg)" : undefined }}
+            >
+              {l.label}
+            </a>
+          );
+        })}
+
+        <motion.span
+          aria-hidden
+          className="pointer-events-none absolute bottom-1 h-0.5 rounded"
+          style={{
+            background: "var(--primary-deep)",
+            boxShadow: "0 0 12px color-mix(in oklab, var(--primary) 50%, transparent)",
+          }}
+          animate={{
+            x: indicator.left,
+            width: indicator.width,
+            opacity: indicator.on ? 1 : 0,
+          }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        />
+      </nav>
+
+      {/* Actions */}
+      <div className="inline-flex items-center justify-end gap-2.5">
+        <ThemeToggle />
+        <a className="btn-ghost hidden md:inline-flex" href="#contact">
+          <span>Let&apos;s talk</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              d="M5 12h13M13 6l6 6-6 6"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <style jsx>{`
+        .nav-shell {
+          top: 16px;
+          left: 16px;
+          right: 16px;
+          padding: 14px 18px;
+        }
+        .nav-shell[data-scrolled] {
+          top: 10px;
+          left: max(16px, calc((100vw - 1100px) / 2));
+          right: max(16px, calc((100vw - 1100px) / 2));
+          padding: 8px 12px 8px 18px;
+          background: var(--glass-bg);
+          border-color: var(--glass-border);
+          backdrop-filter: blur(18px) saturate(1.1);
+          -webkit-backdrop-filter: blur(18px) saturate(1.1);
+          box-shadow: 0 8px 28px rgba(20, 30, 55, 0.08);
+        }
+      `}</style>
+    </header>
+  );
+}
