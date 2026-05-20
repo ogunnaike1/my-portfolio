@@ -138,17 +138,24 @@ const FLOATING_BADGES = [
   },
 ];
 
-function ProfileImage() {
+function ProfileImage({ mobile = false }: { mobile?: boolean }) {
   const reduced = useReducedMotion();
 
+  const frameW = mobile ? "clamp(200px, 62vw, 260px)" : "340px";
+  const frameH = mobile ? "auto" : "420px";
+  const frameRadius = mobile ? "18px" : "24px";
+  const ringRadius = mobile ? "24px" : "36px";
+  const innerRingRadius = mobile ? "20px" : "30px";
+
   return (
-    <div className="relative flex items-center justify-center py-10">
+    <div className="relative flex items-center justify-center py-6 sm:py-10">
 
       {/* Slow-spinning outer dashed ring */}
       <motion.div
-        className="pointer-events-none absolute rounded-[36px]"
+        className="pointer-events-none absolute"
         style={{
-          inset: "-20px",
+          inset: mobile ? "-14px" : "-20px",
+          borderRadius: ringRadius,
           border: "1px dashed color-mix(in oklab, var(--primary) 30%, transparent)",
         }}
         animate={reduced ? {} : { rotate: 360 }}
@@ -157,9 +164,10 @@ function ProfileImage() {
 
       {/* Static inner ring */}
       <motion.div
-        className="pointer-events-none absolute rounded-[30px]"
+        className="pointer-events-none absolute"
         style={{
-          inset: "-8px",
+          inset: mobile ? "-5px" : "-8px",
+          borderRadius: innerRingRadius,
           border: "1px solid var(--glass-border)",
         }}
         initial={{ opacity: 0, scale: 0.88 }}
@@ -180,10 +188,12 @@ function ProfileImage() {
 
           {/* Image frame */}
           <motion.div
-            className="relative overflow-hidden rounded-[24px]"
+            className="relative overflow-hidden"
             style={{
-              width: 340,
-              height: 420,
+              width: frameW,
+              height: frameH,
+              aspectRatio: mobile ? "340 / 420" : undefined,
+              borderRadius: frameRadius,
               border: "1px solid var(--glass-border)",
               boxShadow:
                 "0 40px 90px -20px rgba(0,0,0,0.28), 0 0 0 1px var(--glass-inner), inset 0 1px 0 rgba(255,255,255,0.12)",
@@ -211,26 +221,26 @@ function ProfileImage() {
             />
 
             {/* Top-left name tag */}
-            <div className="absolute left-4 top-4">
+            <div className="absolute left-3 top-3 sm:left-4 sm:top-4">
               <div
-                className="rounded-xl px-3 py-2 backdrop-blur-md"
+                className="rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 backdrop-blur-md"
                 style={{
                   background: "var(--glass-bg)",
                   border: "1px solid var(--glass-border)",
                 }}
               >
-                <div className="font-display text-[13px] font-semibold tracking-tight text-fg">
+                <div className="font-display text-[12px] sm:text-[13px] font-semibold tracking-tight text-fg">
                   Usman Ogunnaike
                 </div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.08em] text-fg-mute">
+                <div className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.08em] text-fg-mute">
                   Full-Stack JS Developer
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Floating badges */}
-          {FLOATING_BADGES.map((badge, i) => (
+          {/* Floating badges — desktop only */}
+          {!mobile && FLOATING_BADGES.map((badge, i) => (
             <motion.div
               key={i}
               className="glass absolute rounded-xl px-3.5 py-2.5"
@@ -294,7 +304,12 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-page">
-        <div className="grid items-center gap-10 lg:gap-12 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] xl:gap-20">
+        <div className="grid items-center gap-6 lg:gap-12 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] xl:gap-20">
+
+          {/* ── Mobile profile image — shown above copy, hidden on lg+ ── */}
+          <div className="flex lg:hidden justify-center">
+            <ProfileImage mobile />
+          </div>
 
           {/* ── LEFT: Copy ── */}
           <div>
@@ -403,7 +418,7 @@ export default function Hero() {
             </FadeUp>
           </div>
 
-          {/* ── RIGHT: Profile image — visible on lg+ only ── */}
+          {/* ── RIGHT: Profile image — desktop only ── */}
           <div className="hidden lg:flex items-center justify-center">
             <ProfileImage />
           </div>
