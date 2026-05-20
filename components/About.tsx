@@ -31,7 +31,7 @@ export default function About() {
         ]}
       />
 
-      <div className="mx-auto grid max-w-page items-start gap-[60px] px-[clamp(20px,4vw,56px)] pb-[60px] lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+      <div className="mx-auto grid max-w-page items-start gap-10 px-[clamp(20px,4vw,56px)] pb-[60px] sm:gap-[60px] lg:grid-cols-[1.1fr_1fr] lg:gap-20">
         <Reveal>
           <div className="text-fg-soft" style={{ fontSize: "clamp(17px,1.4vw,20px)", lineHeight: 1.65 }}>
             <p className="m-0 mb-4 max-w-[540px]">

@@ -12,11 +12,11 @@ interface ThemeCtx {
 const ThemeContext = createContext<ThemeCtx | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("warm");
 
   // Sync from DOM (set by the inline script in <head>) on mount
   useEffect(() => {
-    const initial = (document.documentElement.getAttribute("data-theme") as Theme) || "light";
+    const initial = (document.documentElement.getAttribute("data-theme") as Theme) || "warm";
     setTheme(initial);
   }, []);
 

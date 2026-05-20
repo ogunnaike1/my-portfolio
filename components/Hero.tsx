@@ -193,7 +193,7 @@ function ProfileImage() {
           >
             {/* Image */}
             <img
-              src="https://picsum.photos/seed/iris-calder/340/420"
+              src="https://res.cloudinary.com/dhmqhless/image/upload/v1779306228/Gemini_Generated_Image_5au89p5au89p5au8_qlfh2g.png"
               alt="Usman Ogunnaike"
               className="h-full w-full object-cover"
               onError={(e) => {
@@ -272,7 +272,7 @@ function ProfileImage() {
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden px-[clamp(20px,4vw,56px)] pb-20 pt-[100px]">
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden px-[clamp(20px,4vw,56px)] pb-16 pt-[88px] sm:pb-20 sm:pt-[100px]">
 
       {/* Background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
@@ -294,25 +294,25 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-page">
-        <div className="grid items-center gap-16 lg:grid-cols-[1fr_420px] lg:gap-12 xl:grid-cols-[1fr_480px] xl:gap-20">
+        <div className="grid items-center gap-10 lg:gap-12 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] xl:gap-20">
 
           {/* ── LEFT: Copy ── */}
           <div>
 
             {/* Eyebrow */}
-            <FadeUp delay={0.05} className="mb-9">
+            <FadeUp delay={0.05} className="mb-6 sm:mb-9">
               <div
-                className="inline-flex items-center gap-2.5 rounded-full px-3.5 py-2"
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 sm:gap-2.5 sm:px-3.5 sm:py-2"
                 style={{ border: "1px solid var(--line)", background: "var(--glass-bg)" }}
               >
                 <span
-                  className="h-[7px] w-[7px] rounded-full"
+                  className="h-[7px] w-[7px] shrink-0 rounded-full"
                   style={{
                     background: "var(--ok)",
                     boxShadow: "0 0 0 3px color-mix(in oklab, var(--ok) 22%, transparent)",
                   }}
                 />
-                <span className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-fg-mute">
+                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-fg-mute sm:text-[11.5px] sm:tracking-[0.12em]">
                   Full-Stack JS Developer · Open to Work
                 </span>
               </div>
@@ -320,8 +320,8 @@ export default function Hero() {
 
             {/* Headline */}
             <h1
-              className="m-0 mb-8 font-display font-semibold leading-[1.0] tracking-[-0.03em]"
-              style={{ fontSize: "clamp(42px, 5.6vw, 80px)" }}
+              className="m-0 mb-6 font-display font-semibold leading-[1.0] tracking-[-0.03em] sm:mb-8"
+              style={{ fontSize: "clamp(36px, 5.6vw, 80px)" }}
             >
               <WordMask text="Building software" delay={0.12} as="div" className="block mb-1.5" />
               <WordMask
@@ -333,7 +333,7 @@ export default function Hero() {
             </h1>
 
             {/* Sub */}
-            <FadeUp delay={0.58} className="mb-10">
+            <FadeUp delay={0.58} className="mb-8 sm:mb-10">
               <p
                 className="m-0 max-w-[480px] leading-[1.7] text-fg-soft"
                 style={{ fontSize: "clamp(16px, 1.3vw, 18.5px)" }}
@@ -345,7 +345,7 @@ export default function Hero() {
             </FadeUp>
 
             {/* CTAs */}
-            <FadeUp delay={0.72} className="mb-16">
+            <FadeUp delay={0.72} className="mb-10 sm:mb-16">
               <div className="flex flex-wrap gap-3">
                 <MagneticButton href="#work" className="btn-primary" strength={0.25}>
                   <motion.span
@@ -403,7 +403,7 @@ export default function Hero() {
             </FadeUp>
           </div>
 
-          {/* ── RIGHT: Profile image ── */}
+          {/* ── RIGHT: Profile image — visible on lg+ only ── */}
           <div className="hidden lg:flex items-center justify-center">
             <ProfileImage />
           </div>

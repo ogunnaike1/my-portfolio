@@ -65,9 +65,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
       >
         <div
-          className="relative overflow-hidden"
+          className={`relative overflow-hidden ${project.span === "full" ? "aspect-[4/3] sm:aspect-[16/7] lg:aspect-[21/8]" : "aspect-[4/3] sm:aspect-[16/10]"}`}
           style={{
-            aspectRatio: project.span === "full" ? "21/8" : "16/10",
             borderBottom: "1px solid var(--line)",
             background: "var(--bg-soft)",
           }}
@@ -144,7 +143,7 @@ export default function Work() {
         ]}
       />
 
-      <div className="mx-auto grid max-w-page grid-cols-6 gap-6 px-[clamp(20px,4vw,56px)]">
+      <div className="mx-auto grid max-w-page grid-cols-6 gap-4 sm:gap-6 px-[clamp(20px,4vw,56px)]">
         {PROJECTS.map((p, i) => (
           <ProjectCard key={p.title} project={p} index={i} />
         ))}

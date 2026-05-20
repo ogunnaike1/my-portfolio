@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Prevent theme flash by reading localStorage before hydration */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('ic-theme');if(t!=='dark'&&t!=='light'&&t!=='warm')t='light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}`,
+            __html: `try{var t=localStorage.getItem('ic-theme');if(t!=='dark'&&t!=='light'&&t!=='warm')t='warm';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','warm');}`,
           }}
         />
       </head>

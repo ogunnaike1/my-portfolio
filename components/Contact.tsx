@@ -27,7 +27,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative px-[clamp(20px,4vw,56px)] pb-[120px] pt-[140px]">
+    <section id="contact" className="relative px-[clamp(20px,4vw,56px)] pb-[80px] pt-[100px] sm:pb-[120px] sm:pt-[140px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-20 bottom-0 z-0"
@@ -44,7 +44,7 @@ export default function Contact() {
 
         <WordReveal
           as="h2"
-          className="m-0 mb-6 font-display font-medium leading-[1.02] tracking-[-0.025em] text-balance"
+          className="section-title m-0 mb-6 leading-[1.02]"
           segments={[
             "Let's build something ",
             { text: "great together.", className: "muted" },
@@ -52,7 +52,7 @@ export default function Contact() {
         />
 
         <Reveal delay={120}>
-          <p className="mx-auto m-0 mb-12 max-w-[560px] text-[17px] leading-[1.65] text-fg-soft">
+          <p className="mx-auto m-0 mb-8 sm:mb-12 max-w-[560px] text-[15px] sm:text-[17px] leading-[1.65] text-fg-soft">
             I&apos;m open to full-stack roles, frontend contracts, and remote-first opportunities
             — Nigeria &amp; globally. Whether you need a complete product built or a strong
             engineer on your team, let&apos;s talk.
@@ -140,7 +140,7 @@ export default function Contact() {
         </Reveal>
 
         <Reveal delay={320}>
-          <div className="mt-8 inline-flex flex-wrap justify-center gap-3.5 font-mono text-[13px] text-fg-mute">
+          <div className="mt-8 flex flex-wrap justify-center gap-x-3 gap-y-2 font-mono text-[11px] sm:text-[13px] text-fg-mute">
             <a
               href="mailto:ogunnaikeusman17@gmail.com"
               className="text-fg"

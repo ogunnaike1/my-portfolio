@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
@@ -17,6 +17,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState<string | null>("work");
   const [hoverId, setHoverId] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const linksContainerRef = useRef<HTMLDivElement | null>(null);
   const [indicator, setIndicator] = useState<{ left: number; width: number; on: boolean }>({
@@ -105,10 +106,10 @@ export default function Nav() {
         <span className="hidden text-[17px] sm:inline">Usman&nbsp;Ogunnaike</span>
       </motion.a>
 
-      {/* Links */}
+      {/* Links — hidden on mobile */}
       <nav
         ref={linksContainerRef}
-        className="relative inline-flex items-center gap-7 text-[14.5px] text-fg-soft"
+        className="relative hidden lg:inline-flex items-center gap-7 text-[14.5px] text-fg-soft"
         aria-label="Primary"
       >
         {LINKS.map((l) => {
@@ -150,7 +151,7 @@ export default function Nav() {
       {/* Actions */}
       <div className="inline-flex items-center justify-end gap-2.5">
         <ThemeToggle />
-        <a className="btn-ghost hidden md:inline-flex" href="#contact">
+        <a className="btn-ghost hidden lg:inline-flex" href="#contact">
           <span>Let&apos;s talk</span>
           <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
             <path
@@ -162,7 +163,79 @@ export default function Nav() {
             />
           </svg>
         </a>
+        {/* Hamburger — mobile only */}
+        <button
+          className="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors"
+          style={{ border: "1px solid var(--line)", background: "var(--glass-bg)" }}
+          onClick={() => setMobileOpen((o) => !o)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+        >
+          <span className="relative flex h-4 w-[18px] flex-col justify-between">
+            <motion.span
+              className="block h-px rounded-full"
+              style={{ background: "var(--fg)", transformOrigin: "center" }}
+              animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              className="block h-px rounded-full"
+              style={{ background: "var(--fg)" }}
+              animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              className="block h-px rounded-full"
+              style={{ background: "var(--fg)", transformOrigin: "center" }}
+              animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </span>
+        </button>
       </div>
+
+      {/* Mobile menu drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            className="lg:hidden fixed inset-x-0 top-[64px] z-40 px-5 pb-6"
+            style={{
+              background: "var(--glass-bg)",
+              backdropFilter: "blur(24px) saturate(1.1)",
+              WebkitBackdropFilter: "blur(24px) saturate(1.1)",
+              borderBottom: "1px solid var(--glass-border)",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.12)",
+            }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: [0.2, 0.7, 0.2, 1] }}
+          >
+            {LINKS.map((l, i) => (
+              <motion.a
+                key={l.href}
+                href={l.href}
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-between py-4 font-display text-[22px] font-medium tracking-tight text-fg"
+                style={{ borderBottom: i < LINKS.length - 1 ? "1px solid var(--line)" : "none" }}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.06, duration: 0.3 }}
+              >
+                {l.label}
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden>
+                  <path stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" d="M3 8h10M9 4l4 4-4 4" />
+                </svg>
+              </motion.a>
+            ))}
+            <div className="mt-5">
+              <a href="#contact" onClick={() => setMobileOpen(false)} className="btn-primary w-full justify-center">
+                Let&apos;s talk
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style jsx>{`
         .nav-shell {

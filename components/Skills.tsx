@@ -61,7 +61,7 @@ function Bars({ group }: { group: (typeof BAR_GROUPS)[number] }) {
       {group.bars.map((b) => (
         <li
           key={b.name}
-          className="grid grid-cols-[160px_1fr] items-center gap-4 py-3.5 font-display text-[15px] font-medium tracking-tight"
+          className="grid grid-cols-[120px_1fr] sm:grid-cols-[160px_1fr] items-center gap-3 sm:gap-4 py-3.5 font-display text-[14px] sm:text-[15px] font-medium tracking-tight"
           style={{ borderBottom: "1px solid var(--line)" }}
         >
           <span>{b.name}</span>
@@ -97,6 +97,25 @@ export default function Skills() {
         ]}
       />
 
+      {/* Mobile tag cloud — flow layout, hidden on lg+ */}
+      <Reveal delay={60}>
+        <div className="lg:hidden mx-auto max-w-page px-[clamp(20px,4vw,56px)] pb-10 flex flex-wrap gap-2.5">
+          {TAGS.map((t) => (
+            <span
+              key={t.text}
+              className={`inline-flex items-center font-display font-medium tracking-tight text-fg rounded-full px-4 py-2 ${t.large ? "text-[15px]" : "text-[13px]"}`}
+              style={{
+                border: "1px solid var(--glass-border)",
+                background: "var(--glass-bg)",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              {t.text}
+            </span>
+          ))}
+        </div>
+      </Reveal>
+
       <div className="mx-auto grid max-w-page items-start gap-[60px] px-[clamp(20px,4vw,56px)] lg:grid-cols-[1fr_1.2fr]">
         <div>
           {BAR_GROUPS.map((g, i) => (
@@ -110,7 +129,7 @@ export default function Skills() {
         </div>
 
         <Reveal delay={80}>
-          <div className="relative min-h-[540px] py-[30px] lg:min-h-[480px]" aria-label="Tools and ecosystem">
+          <div className="relative hidden lg:block min-h-[540px] py-[30px] lg:min-h-[480px]" aria-label="Tools and ecosystem">
             {TAGS.map((t) => (
               <motion.span
                 key={t.text}
