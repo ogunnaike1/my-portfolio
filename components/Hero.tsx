@@ -306,11 +306,6 @@ export default function Hero() {
       <div className="relative z-10 mx-auto w-full max-w-page">
         <div className="grid items-center gap-6 lg:gap-12 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] xl:gap-20">
 
-          {/* ── Mobile profile image — shown above copy, hidden on lg+ ── */}
-          <div className="flex lg:hidden justify-center">
-            <ProfileImage mobile />
-          </div>
-
           {/* ── LEFT: Copy ── */}
           <div>
 
@@ -416,6 +411,11 @@ export default function Hero() {
                 ))}
               </dl>
             </FadeUp>
+          </div>
+
+          {/* ── Mobile profile image — below copy, hidden on lg+ ── */}
+          <div className="flex lg:hidden justify-center">
+            <ProfileImage mobile />
           </div>
 
           {/* ── RIGHT: Profile image — desktop only ── */}
