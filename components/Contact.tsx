@@ -27,7 +27,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative px-[clamp(20px,4vw,56px)] pb-[80px] pt-[100px] sm:pb-[120px] sm:pt-[140px]">
+    <section id="contact" className="relative px-[clamp(20px,4vw,56px)] pb-[60px] pt-[72px] sm:pb-[80px] sm:pt-[100px] lg:pb-[120px] lg:pt-[140px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-20 bottom-0 z-0"
