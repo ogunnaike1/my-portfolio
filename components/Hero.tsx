@@ -203,7 +203,7 @@ function ProfileImage({ mobile = false }: { mobile?: boolean }) {
           >
             {/* Image */}
             <img
-              src="https://res.cloudinary.com/dhmqhless/image/upload/v1779306228/Gemini_Generated_Image_5au89p5au89p5au8_qlfh2g.png"
+              src="https://res.cloudinary.com/dhmqhless/image/upload/v1779313001/Gemini_Generated_Image_3rm4ja3rm4ja3rm4_jkxc9a.png"
               alt="Usman Ogunnaike"
               className="h-full w-full object-cover"
               onError={(e) => {

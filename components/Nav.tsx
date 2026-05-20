@@ -87,7 +87,7 @@ export default function Nav() {
   return (
     <header
       data-scrolled={scrolled || undefined}
-      className="nav-shell fixed z-50 grid grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-full border border-transparent transition-all duration-500 ease-[cubic-bezier(.2,.7,.2,1)]"
+      className="nav-shell fixed z-50 grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-full border border-transparent transition-all duration-500 ease-[cubic-bezier(.2,.7,.2,1)]"
     >
       {/* Logo */}
       <motion.a
