@@ -386,7 +386,7 @@ export default function Hero() {
                     <span>Get in Touch</span>
                   </motion.span>
                 </MagneticButton>
-                <MagneticButton href="/Usman_Ogunnaike_CV (2)a.pdf" className="btn-ghost" strength={0.25} download>
+                <MagneticButton href="/Usman_Ogunnaike_CV.pdf" className="btn-ghost" strength={0.25} download>
                   <motion.span
                     className="inline-flex items-center gap-2"
                     whileHover={{ scale: 1.02 }}
