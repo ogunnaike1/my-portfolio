@@ -3,9 +3,29 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "Usman Ogunnaike — Software Developer",
+  title: "Usman Ogunnaike — Full-Stack JS Developer",
   description:
-    "Building thoughtful software at the seam of design & systems. Selected work, writing, and contact for Usman Ogunnaike.",
+    "Full-Stack JavaScript developer based in Lagos. I build real-time web apps, e-commerce platforms, and production-grade APIs. Open to full-stack roles and remote contracts.",
+  icons: {
+    icon: "/icon",
+    shortcut: "/icon",
+    apple: "/icon",
+  },
+  openGraph: {
+    title: "Usman Ogunnaike — Full-Stack JS Developer",
+    description:
+      "Full-Stack JavaScript developer based in Lagos. I build real-time web apps, e-commerce platforms, and production-grade APIs.",
+    url: "https://usmanogunnaike.vercel.app",
+    siteName: "Usman Ogunnaike",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Usman Ogunnaike — Full-Stack JS Developer",
+    description:
+      "Full-Stack JavaScript developer based in Lagos. Building real-time apps, e-commerce platforms, and production-grade APIs.",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
