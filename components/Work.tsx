@@ -5,7 +5,6 @@ import { type ReactNode } from "react";
 import Reveal from "./Reveal";
 import SectionHead from "./SectionHead";
 import MagneticButton from "./MagneticButton";
-import { ShotChat, ShotRealEstate, ShotFintech } from "./ProjectShots";
 
 interface Project {
   span: "full" | "lg" | "sm";
@@ -23,29 +22,65 @@ const PROJECTS: Project[] = [
     span: "full",
     meta: ["Featured", "·", "Solo project", "·", "2024"],
     title: "StoneChat — Real-Time Chat Application",
-    copy: "A fully featured, production-deployed chat platform built end-to-end. Real-time messaging via Socket.io, JWT auth with session management, full admin panel with analytics, Cloudinary media uploads, and friend request system. Deployed on Render + Vercel.",
-    tags: ["React", "Node.js", "Express", "MongoDB", "Socket.io", "JWT", "Cloudinary", "Recharts"],
-    shot: <ShotChat />,
+    copy: "Full-stack messaging platform built from scratch — real-time bidirectional messaging via Socket.IO, stream-based Cloudinary file uploads (images, video, documents), 3-step OTP password reset, JWT role separation, admin dashboard with MongoDB aggregation analytics (14-day trends, hourly heatmaps), and an interactive Three.js particle landing page.",
+    tags: ["React 19", "TypeScript", "Node.js", "Express 5", "MongoDB", "Socket.IO", "Cloudinary", "Tailwind CSS", "Framer Motion", "Three.js", "Vercel", "Render"],
+    shot: (
+      <img
+        src="https://res.cloudinary.com/dhmqhless/image/upload/v1780715382/Screenshot_135_cp8zuo.png"
+        alt="StoneChat screenshot"
+        className="h-full w-full object-cover object-top"
+      />
+    ),
     shotPad: "0",
-    url: "https://stonechatapp.vercel.app",
+    url: "https://stone-chatapp.vercel.app/",
   },
   {
     span: "lg",
-    meta: ["Solo project", "·", "2024"],
-    title: "Eldorado — Real Estate Platform",
-    copy: "Modern, interactive real estate web app with property discovery, vendor onboarding, and advanced filtering. Framer Motion animations, role-based auth for agents and tenants, and REST API integration.",
-    tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "REST API"],
-    shot: <ShotRealEstate />,
+    meta: ["Solo project", "·", "2025"],
+    title: "Skin Essential Plus — E-Commerce & Booking Platform",
+    copy: "Premium spa and skincare e-commerce site for a Lagos-based brand. Customers can shop for products and book beauty appointments in one place — with a multi-step booking flow, discount codes, and dual Nigerian payment gateways (Paystack + Monnify). Fully responsive with smooth Framer Motion animations throughout.",
+    tags: ["Next.js 14", "TypeScript", "Tailwind CSS", "Supabase", "Framer Motion", "Cloudinary", "Paystack", "Monnify"],
+    shot: (
+      <img
+        src="https://res.cloudinary.com/dhmqhless/image/upload/v1780715383/Screenshot_137_fub6jh.png"
+        alt="Skin Essential Plus screenshot"
+        className="h-full w-full object-cover object-top"
+      />
+    ),
     shotPad: "0",
+    url: "https://www.skinessentialplus.com/",
   },
   {
     span: "sm",
-    meta: ["Team project", "·", "2024"],
-    title: "Poolside Africa — Digital Finance Platform",
-    copy: "Fintech platform enabling community savings, crowdfunding, and reward-based tools for underserved Nigerian communities. Frontend development, REST API integration, and accessible UI for non-technical users.",
-    tags: ["React", "Node.js", "REST APIs"],
-    shot: <ShotFintech />,
+    meta: ["Solo project", "·", "2025"],
+    title: "Eldorado — Luxury Real Estate Platform",
+    copy: "Production-grade luxury property website targeting Banana Island, Ikoyi, VI, and Eko Atlantic. Features animated hero carousel, dynamic project catalogue with filtering, detail pages with galleries and Google Maps, appointment booking via Resend, and a Supabase-backed admin dashboard.",
+    tags: ["Next.js 15", "TypeScript", "Tailwind CSS v4", "Framer Motion", "Supabase", "Resend"],
+    shot: (
+      <img
+        src="https://res.cloudinary.com/dhmqhless/image/upload/v1780715385/Screenshot_136_roqnxu.png"
+        alt="Eldorado Real Estate screenshot"
+        className="h-full w-full object-cover object-top"
+      />
+    ),
     shotPad: "0",
+    url: "https://www.eldoradolmtd.com/",
+  },
+  {
+    span: "full",
+    meta: ["Personal project", "·", "Solo", "·", "2025"],
+    title: "Birthday Surprise — Interactive Web Gift",
+    copy: "A custom emotionally-driven web experience built as a birthday gift. 9-screen app state machine with animated transitions, passcode-protected entry gate, chapter-based personal story, photo gallery, background music player with autoplay on unlock, CSS falling-petal particle system, and localStorage progress persistence — every line of content written and curated by hand.",
+    tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS", "Cloudinary"],
+    shot: (
+      <img
+        src="https://res.cloudinary.com/dhmqhless/image/upload/v1780715381/Screenshot_139_huviwj.png"
+        alt="Birthday Surprise screenshot"
+        className="h-full w-full object-cover object-top"
+      />
+    ),
+    shotPad: "0",
+    url: "https://madeforozioyza.vercel.app/",
   },
 ];
 
@@ -138,7 +173,7 @@ export default function Work() {
       <SectionHead
         index="02 — selected work"
         segments={[
-          "Three projects shipped ",
+          "Four projects shipped ",
           { text: "from concept to production.", className: "muted" },
         ]}
       />

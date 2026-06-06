@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
-  { href: "#work", label: "Work" },
+  { href: "#work", label: "Projects" },
   { href: "#about", label: "About" },
-  { href: "#skills", label: "Craft" },
+  { href: "#skills", label: "Skills" },
+  { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -151,7 +152,7 @@ export default function Nav() {
       {/* Actions */}
       <div className="inline-flex items-center justify-end gap-2.5">
         <ThemeToggle />
-        <a className="btn-ghost hidden lg:inline-flex" href="#contact">
+        <a className="btn-ghost hidden lg:inline-flex" href="https://wa.me/234813156162" target="_blank" rel="noopener noreferrer">
           <span>Let&apos;s talk</span>
           <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
             <path
@@ -229,7 +230,7 @@ export default function Nav() {
               </motion.a>
             ))}
             <div className="mt-5">
-              <a href="#contact" onClick={() => setMobileOpen(false)} className="btn-primary w-full justify-center">
+              <a href="https://wa.me/234813156162" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="btn-primary w-full justify-center">
                 Let&apos;s talk
               </a>
             </div>

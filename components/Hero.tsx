@@ -203,7 +203,7 @@ function ProfileImage({ mobile = false }: { mobile?: boolean }) {
           >
             {/* Image */}
             <img
-              src="https://res.cloudinary.com/dhmqhless/image/upload/v1779313001/Gemini_Generated_Image_3rm4ja3rm4ja3rm4_jkxc9a.png"
+              src="https://res.cloudinary.com/dhmqhless/image/upload/v1780705270/usman-portfolio_ig95rc.png"
               alt="Usman Ogunnaike"
               className="h-full w-full object-cover"
               onError={(e) => {
@@ -384,6 +384,25 @@ export default function Hero() {
                     transition={{ type: "spring", stiffness: 300, damping: 22 }}
                   >
                     <span>Get in Touch</span>
+                  </motion.span>
+                </MagneticButton>
+                <MagneticButton href="/Usman_Ogunnaike_CV (2)a.pdf" className="btn-ghost" strength={0.25} download>
+                  <motion.span
+                    className="inline-flex items-center gap-2"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                  >
+                    <svg viewBox="0 0 16 16" width="13" height="13" fill="none" aria-hidden>
+                      <path
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M8 3v7M5 7l3 3 3-3M3 13h10"
+                      />
+                    </svg>
+                    <span>Download CV</span>
                   </motion.span>
                 </MagneticButton>
               </div>

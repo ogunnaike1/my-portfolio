@@ -10,6 +10,7 @@ interface MagneticProps {
   onClick?: () => void;
   strength?: number;
   type?: "button" | "submit";
+  download?: boolean;
 }
 
 /**
@@ -23,6 +24,7 @@ export default function MagneticButton({
   onClick,
   strength = 0.3,
   type = "button",
+  download,
 }: MagneticProps) {
   const ref = useRef<HTMLElement | null>(null);
   const reduced = useReducedMotion();
@@ -52,6 +54,7 @@ export default function MagneticButton({
         style={{ x: springX, y: springY }}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
+        download={download || undefined}
       >
         {children}
       </motion.a>
