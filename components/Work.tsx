@@ -142,6 +142,27 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               </span>
             ))}
           </div>
+
+          {project.url && (
+            <div className="mt-5">
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-mono text-[12px] font-medium tracking-wide transition-all hover:opacity-80"
+                style={{
+                  background: "color-mix(in oklab, var(--primary) 14%, transparent)",
+                  border: "1px solid color-mix(in oklab, var(--primary) 30%, transparent)",
+                  color: "var(--primary-deep)",
+                }}
+              >
+                <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden fill="none">
+                  <path stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" d="M7 17L17 7M9 7h8v8" />
+                </svg>
+                Visit Live Site
+              </a>
+            </div>
+          )}
         </div>
 
         <a
