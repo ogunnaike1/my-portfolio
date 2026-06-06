@@ -35,6 +35,13 @@ const SERVICES: Service[] = [
   },
   {
     number: "04",
+    title: "SEO & Performance Optimisation",
+    description:
+      "Fast sites rank higher and convert better. I implement technical SEO from the ground up — semantic markup, metadata, sitemaps, Core Web Vitals — so your site gets found and loads instantly.",
+    deliverables: ["Technical SEO audit", "Meta & Open Graph tags", "Sitemap & robots.txt", "Core Web Vitals tuning", "Google Analytics / Search Console"],
+  },
+  {
+    number: "05",
     title: "UI / UX Implementation",
     description:
       "Pixel-precise, animated interfaces that feel as good as they look. I translate Figma designs (or my own design judgement) into accessible, responsive, production-ready code.",
