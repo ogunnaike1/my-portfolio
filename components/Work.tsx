@@ -38,7 +38,7 @@ const PROJECTS: Project[] = [
     span: "lg",
     meta: ["Solo project", "·", "2025"],
     title: "Skin Essential Plus — E-Commerce & Booking Platform",
-    copy: "Premium spa and skincare e-commerce site for a Lagos-based brand. Customers can shop for products and book beauty appointments in one place — with a multi-step booking flow, discount codes, and dual Nigerian payment gateways (Paystack + Monnify). Fully responsive with smooth Framer Motion animations throughout.",
+    copy: "Premium spa and skincare e-commerce site for a ibadan-based brand. Customers can shop for products and book beauty appointments in one place — with a multi-step booking flow, discount codes, and dual Nigerian payment gateways (Paystack + Monnify). Fully responsive with smooth Framer Motion animations throughout.",
     tags: ["Next.js 14", "TypeScript", "Tailwind CSS", "Supabase", "Framer Motion", "Cloudinary", "Paystack", "Monnify"],
     shot: (
       <img
