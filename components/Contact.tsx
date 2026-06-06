@@ -168,7 +168,7 @@ export default function Contact() {
             </a>
             <span>·</span>
             <a
-              href="https://github.com/usmanogunnaike"
+              href="https://github.com/ogunnaike1"
               target="_blank"
               rel="noopener noreferrer"
               className="text-fg"

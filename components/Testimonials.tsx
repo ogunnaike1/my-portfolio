@@ -16,26 +16,26 @@ const TESTIMONIALS: Testimonial[] = [
   {
     quote:
       "Usman delivered the entire platform ahead of schedule. The attention to detail on the UI — animations, mobile responsiveness, the little micro-interactions — genuinely impressed our team and our clients noticed immediately.",
-    name: "Client Name",
-    role: "Founder",
-    company: "Company",
-    initials: "CN",
+    name: "Eldorado CEO",
+    role: "Founder & CEO",
+    company: "Eldorado Limited",
+    initials: "EL",
   },
   {
     quote:
       "Working with Usman was seamless. He asked the right questions upfront, kept communication tight throughout, and the final product was exactly what we envisioned — clean code, fast load times, and zero issues on launch.",
-    name: "Client Name",
-    role: "Product Manager",
-    company: "Company",
-    initials: "CN",
+    name: "Skin Essential Plus CEO",
+    role: "Founder & CEO",
+    company: "Skin Essential Plus",
+    initials: "SE",
   },
   {
     quote:
       "The real-time features he built were rock solid. No dropped messages, instant delivery, and the admin dashboard gave us exactly the visibility we needed. Would hire again without hesitation.",
-    name: "Client Name",
-    role: "CTO",
-    company: "Company",
-    initials: "CN",
+    name: "StoneChat CEO",
+    role: "Founder & CEO",
+    company: "StoneChat",
+    initials: "SC",
   },
 ];
 

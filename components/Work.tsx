@@ -186,7 +186,7 @@ export default function Work() {
 
       <div className="mx-auto flex max-w-page justify-center px-[clamp(20px,4vw,56px)] pt-[50px]">
         <Reveal>
-          <MagneticButton href="https://github.com/usmanogunnaike" className="btn-link">
+          <MagneticButton href="https://github.com/ogunnaike1" className="btn-link">
             <span>View GitHub</span>
             <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
               <path
