@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   description:
     "Full-Stack JavaScript developer based in Lagos. I build real-time web apps, e-commerce platforms, and production-grade APIs. Open to full-stack roles and remote contracts.",
   icons: {
-    icon: "/icon",
-    shortcut: "/icon",
-    apple: "/icon",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
   openGraph: {
     title: "Usman Ogunnaike — Full-Stack JS Developer",
