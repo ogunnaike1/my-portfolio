@@ -72,7 +72,7 @@ export default function Contact() {
                 id="cname"
                 type="text"
                 autoComplete="name"
-                placeholder="Jane Smith"
+                placeholder="Usman Ogunnaike"
                 className="field-input"
               />
             </div>
@@ -84,7 +84,7 @@ export default function Contact() {
                 id="cmail"
                 type="email"
                 autoComplete="email"
-                placeholder="jane@company.com"
+                placeholder="usman@gmail.com"
                 className="field-input"
               />
             </div>
@@ -158,7 +158,7 @@ export default function Contact() {
             </a>
             <span>·</span>
             <a
-              href="https://linkedin.com/in/usmanogunnaike"
+              href="https://www.linkedin.com/in/usman-ogunnaike-2932b9225/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-fg"

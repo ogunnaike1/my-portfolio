@@ -47,7 +47,7 @@ export default function About() {
               that solves real-world problems. Currently based in Lagos and open to remote
               opportunities globally. Connect on{" "}
               <a
-                href="https://linkedin.com/in/usmanogunnaike"
+                href="https://www.linkedin.com/in/usman-ogunnaike-2932b9225/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary-deep"
