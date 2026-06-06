@@ -11,6 +11,8 @@ const CHIPS = ["Full-Stack", "Frontend", "Backend", "Contract"];
 export default function Contact() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const toggleChip = (c: string) => {
     setSelected((prev) => {
@@ -21,9 +23,32 @@ export default function Contact() {
     });
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    setLoading(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("cname") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("cmail") as HTMLInputElement).value;
+    const message = (form.elements.namedItem("cmsg") as HTMLTextAreaElement).value;
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, interests: Array.from(selected) }),
+      });
+
+      if (!res.ok) throw new Error("Failed to send");
+      setSent(true);
+      form.reset();
+      setSelected(new Set());
+    } catch {
+      setError("Something went wrong. Please try again or email me directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,7 +64,7 @@ export default function Contact() {
 
       <div className="relative z-10 mx-auto max-w-[820px] text-center">
         <Reveal>
-          <div className="section-index mb-6">05 — contact</div>
+          <div className="section-index mb-6">06 — contact</div>
         </Reveal>
 
         <WordReveal
@@ -113,17 +138,13 @@ export default function Contact() {
                   </button>
                 ))}
               </div>
-              <MagneticButton type="submit" className="btn-primary">
-                <span>Send</span>
-                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    d="M5 12h13M13 6l6 6-6 6"
-                  />
-                </svg>
+              <MagneticButton type="submit" className="btn-primary" onClick={undefined}>
+                <span>{loading ? "Sending…" : "Send"}</span>
+                {!loading && (
+                  <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
+                    <path fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" d="M5 12h13M13 6l6 6-6 6" />
+                  </svg>
+                )}
               </MagneticButton>
             </div>
 
@@ -135,6 +156,15 @@ export default function Contact() {
               transition={{ duration: 0.5 }}
             >
               Thanks — I&apos;ll reply within 24 hours.
+            </motion.div>
+            <motion.div
+              aria-live="polite"
+              className="col-span-1 font-mono text-[12px] sm:col-span-2"
+              style={{ color: "var(--err, #e05252)" }}
+              animate={{ opacity: error ? 1 : 0, y: error ? 0 : 4 }}
+              transition={{ duration: 0.5 }}
+            >
+              {error}
             </motion.div>
           </form>
         </Reveal>

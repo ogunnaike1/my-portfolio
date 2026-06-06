@@ -90,7 +90,7 @@ export default function Skills() {
   return (
     <section id="skills">
       <SectionHead
-        index="03 — craft"
+        index="04 — craft"
         segments={[
           "Tools I reach for, ",
           { text: "and the ones I keep sharpening.", className: "muted" },

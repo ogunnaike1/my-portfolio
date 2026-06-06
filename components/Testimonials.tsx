@@ -61,7 +61,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials">
       <SectionHead
-        index="04 — testimonials"
+        index="05 — testimonials"
         segments={[
           "What clients ",
           { text: "say about working with me.", className: "muted" },
