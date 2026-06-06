@@ -237,7 +237,7 @@ export default function Contact() {
             </a>
             {/* Instagram */}
             <a
-              href="https://instagram.com/your_handle"
+              href="https://www.instagram.com/usmansegun17?igsh=MXJmemdwaXduZ2Rxaw%3D%3D&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
