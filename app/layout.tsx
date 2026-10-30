@@ -1,58 +1,54 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import type { Metadata } from 'next';
+import './globals.css';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import ProjectModal from '@/components/ProjectModal';
+import { SITE } from '@/data/site';
+
+const TITLE = 'Usman Ogunnaike — Developer & Creative';
+const DESC = 'Portfolio of Usman Ogunnaike, a developer and creative in Lagos working across websites, mobile apps, motion graphics and 3D architectural visualisation.';
 
 export const metadata: Metadata = {
-  title: "Usman Ogunnaike — Full-Stack JS Developer",
-  description:
-    "Full-Stack JavaScript developer based in Lagos. I build real-time web apps, e-commerce platforms, and production-grade APIs. Open to full-stack roles and remote contracts.",
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
-  },
+  metadataBase: new URL(SITE.url),
+  title: { default: TITLE, template: '%s — Usman Ogunnaike' },
+  description: DESC,
+  authors: [{ name: SITE.name, url: SITE.url }],
+  icons: { icon: '/icon.svg' },
   openGraph: {
-    title: "Usman Ogunnaike — Full-Stack JS Developer",
-    description:
-      "Full-Stack JavaScript developer based in Lagos. I build real-time web apps, e-commerce platforms, and production-grade APIs.",
-    url: "https://usmanogunnaike.vercel.app",
-    siteName: "Usman Ogunnaike",
-    locale: "en_US",
-    type: "website",
+    title: TITLE,
+    description: DESC,
+    url: SITE.url,
+    siteName: SITE.name,
+    locale: 'en_US',
+    type: 'website',
+    images: [{ url: SITE.portrait, width: 1254, height: 1254, alt: 'Portrait of Usman Ogunnaike' }],
   },
-  twitter: {
-    card: "summary",
-    title: "Usman Ogunnaike — Full-Stack JS Developer",
-    description:
-      "Full-Stack JavaScript developer based in Lagos. Building real-time apps, e-commerce platforms, and production-grade APIs.",
-  },
+  twitter: { card: 'summary', title: TITLE, description: DESC, images: [SITE.portrait] },
+};
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  url: SITE.url,
+  image: SITE.url + SITE.portrait,
+  jobTitle: 'Developer and creative',
+  description: DESC,
+  email: SITE.contact.email,
+  address: { '@type': 'PostalAddress', addressLocality: 'Lagos', addressCountry: 'NG' },
+  knowsAbout: ['Web development', 'Mobile apps', 'Motion graphics', '3D architectural visualisation'],
+  sameAs: SITE.contact.socials.filter((s) => s.label !== 'WhatsApp').map((s) => s.href),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="light" suppressHydrationWarning>
+    <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preconnect" href="https://api.fontshare.com" />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&f[]=general-sans@400,500,600&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-        {/* Prevent theme flash by reading localStorage before hydration */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('ic-theme');document.documentElement.setAttribute('data-theme',t==='dark'||t==='light'||t==='warm'?t:'light');}catch(e){}`,
-          }}
-        />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600&f[]=satoshi@400,500,700&display=swap" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
       </head>
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
+      <body>{children}<WhatsAppButton /><ProjectModal /></body>
     </html>
   );
 }

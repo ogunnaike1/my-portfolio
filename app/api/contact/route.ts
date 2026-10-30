@@ -1,39 +1,46 @@
-import { Resend } from "resend";
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { SITE } from '@/data/site';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
+
+const esc = (v: string) => v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+const clean = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
 export async function POST(req: Request) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  try {
-    const { name, email, message, interests } = await req.json();
+  let body: Record<string, unknown>;
+  try { body = await req.json(); } catch { return NextResponse.json({ error: 'Invalid request.' }, { status: 400 }); }
 
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
-    }
+  if (clean(body.company, 200)) return NextResponse.json({ success: true }); // honeypot: pretend success to bots
+  const name = clean(body.name, 120), email = clean(body.email, 200), service = clean(body.service, 80), message = clean(body.message, 5000);
+  if (!name || !email || !message) return NextResponse.json({ error: 'Please fill in your name, email and message.' }, { status: 400 });
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
 
-    await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
-      to: "ogunnaikeusman17@gmail.com",
-      replyTo: email,
-      subject: `New message from ${name} — Portfolio`,
-      html: `
-        <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
-          <h2 style="margin-bottom:4px;">New contact from your portfolio</h2>
-          <p style="color:#666;margin-top:0;">Someone reached out via your contact form.</p>
-          <hr style="border:none;border-top:1px solid #eee;margin:20px 0;" />
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-          ${interests?.length ? `<p><strong>Interests:</strong> ${interests.join(", ")}</p>` : ""}
-          <p><strong>Message:</strong></p>
-          <p style="background:#f5f5f5;padding:16px;border-radius:8px;white-space:pre-wrap;">${message}</p>
-        </div>
-      `,
-    });
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return NextResponse.json({ error: 'Email sending is not set up yet.' }, { status: 503 });
 
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error("Contact form error:", err);
-    return NextResponse.json({ error: "Failed to send message." }, { status: 500 });
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: process.env.CONTACT_FROM || 'Portfolio Contact <onboarding@resend.dev>',
+      to: [process.env.CONTACT_TO || SITE.contact.email],
+      reply_to: email,
+      subject: `New portfolio enquiry from ${name}${service ? ' — ' + service : ''}`,
+      html: `<div style="font-family:sans-serif;max-width:600px">
+        <h2 style="margin:0 0 4px">New portfolio enquiry</h2>
+        <p style="color:#666;margin:0 0 16px">Sent from the contact form on your portfolio.</p>
+        <p><strong>Name:</strong> ${esc(name)}</p>
+        <p><strong>Email:</strong> <a href="mailto:${esc(email)}">${esc(email)}</a></p>
+        ${service ? `<p><strong>Service:</strong> ${esc(service)}</p>` : ''}
+        <p><strong>Message:</strong></p>
+        <p style="background:#f5f5f2;padding:16px;white-space:pre-wrap">${esc(message)}</p>
+      </div>`
+    })
+  }).catch(() => null);
+
+  if (!res || !res.ok) {
+    if (res) console.error('Contact email failed:', res.status, await res.text().catch(() => ''));
+    return NextResponse.json({ error: 'The message could not be sent.' }, { status: 502 });
   }
+  return NextResponse.json({ success: true });
 }

@@ -25,3 +25,6 @@ design-extract3/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Reference copy of the Stone Labs site (contains its own .env, git history and node_modules)
+stonelabs/
