@@ -39,7 +39,7 @@ export const SITE = {
   ],
   home: {
     hero: {
-      title: 'I build websites, apps, and visual experiences for businesses.',
+      title: 'I build websites, apps and visuals.',
       text: 'I’m Usman Ogunnaike, a developer and creative working across web development, mobile apps, motion graphics, and 3D architectural visualisation.'
     },
     featured: ['leave-your-legacy', 'salt-sapphire-explainer', 'interior-concept', 'eldorado', 'dortunez-film', 'stonechat'],
