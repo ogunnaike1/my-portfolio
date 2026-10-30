@@ -32,7 +32,7 @@ export default function ServicesPage() {
           <article key={s.id} id={s.id} className="svc-row" data-row style={{ scrollMarginTop: 90 }}>
             <div className="svc-media" data-media>
               {s.image ? (
-                <img src={s.image} alt={s.name + ' — example of my work'} className="img-fill" loading="lazy" />
+                <img src={s.image} alt={s.name + ' — example of my work'} className="img-fill" decoding="async" loading="lazy" />
               ) : (
                 <div style={css('position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px')}>
                   <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="#8a857d" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={ICONS[s.id]} /></svg>
